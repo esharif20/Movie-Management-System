@@ -1,0 +1,118 @@
+/*
+ * Gradle build configuration for WarwickPlus project
+ * 
+ * Includes:
+ * - Application plugin (to run CLI app with `gradlew run`)
+ * - JUnit 5 (Jupiter) for testing
+ * - Custom run tasks (studentrun, minrun, examplerun)
+ * - Test logging configuration for clearer console output
+ */
+
+plugins {
+    // Apply the application plugin to add support for building a CLI application in Java.
+    id 'application'
+}
+
+repositories {
+    // Use Maven Central for resolving dependencies.
+    mavenCentral()
+}
+
+dependencies {
+    // ----------------------------
+    // Test dependencies (JUnit 5)
+    // ----------------------------
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.1'
+    testImplementation 'org.junit.jupiter:junit-jupiter-params:5.7.1'
+    testImplementation 'org.assertj:assertj-core:3.24.2'
+    testImplementation 'commons-io:commons-io:2.11.0'
+
+    // JUnit Jupiter Engine (runtime)
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+
+    // ----------------------------
+    // Application dependencies
+    // ----------------------------
+    implementation 'org.json:json:20220924'
+    implementation 'org.apache.commons:commons-csv:1.9.0'
+    implementation 'commons-cli:commons-cli:1.5.0'
+
+    // Example: add SQLite JDBC if needed later
+    // implementation 'org.xerial:sqlite-jdbc:3.40.0.0'
+}
+
+application {
+    // Define the main class for the application.
+    mainClass = 'WarwickPlus'
+}
+
+// ---------------------------------------
+// Custom tasks to run the application
+// ---------------------------------------
+
+task studentrun(type: JavaExec) {
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = 'WarwickPlus'
+    args = ['-n', '5000']
+}
+
+task minrun(type: JavaExec) {
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = 'WarwickPlus'
+    args = ['-n', '100']
+}
+
+task examplerun(type: JavaExec) {
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = 'RunWithExampleStores'
+}
+
+// ---------------------------------------
+// Test configuration and logging
+// ---------------------------------------
+
+// We removed the old "MaxPermSize" argument (deprecated in Java 8+)
+// and replaced it with modern heap settings (-Xmx for max heap).
+// Test logging is configured to show PASS/FAIL/SKIP in console
+// with detailed stack traces.
+
+tasks.withType(Test) {
+    // Set heap size for test JVM(s)
+    minHeapSize = "128m"
+    maxHeapSize = "4g"
+
+    // Modern JVM args (no more PermGen in Java 17/21)
+    jvmArgs '-Xmx2048m'
+
+    // Use JUnit 5 platform
+    useJUnitPlatform()
+
+    // Configure test logging
+    testLogging {
+        // Show these events at LIFECYCLE level (default console output)
+        events "PASSED", "FAILED", "SKIPPED"
+
+        // Show full stack traces and causes
+        exceptionFormat "FULL"
+        showExceptions true
+        showCauses true
+        showStackTraces true
+        showStandardStreams true
+
+        // Print summary after the test suite finishes
+        afterSuite { desc, result ->
+            if (!desc.parent) { // only outermost suite
+                def output = "Results: ${result.resultType} " +
+                             "(${result.testCount} tests, " +
+                             "${result.successfulTestCount} passed, " +
+                             "${result.failedTestCount} failed, " +
+                             "${result.skippedTestCount} skipped)"
+                def startItem = '|  ', endItem = '  |'
+                def repeatLength = startItem.length() + output.length() + endItem.length()
+                println('\n' + ('-' * repeatLength) + 
+                        '\n' + startItem + output + endItem + 
+                        '\n' + ('-' * repeatLength))
+            }
+        }
+    }
+}

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="RatingsTest" tests="21" skipped="0" failures="0" errors="0" timestamp="2025-09-14T20:49:10" hostname="Eshans-Laptop.local" time="0.009">
+  <properties/>
+  <testcase name="testSize()" classname="RatingsTest" time="0.0"/>
+  <testcase name="testGetMovieAverageRatingNeg()" classname="RatingsTest" time="0.0"/>
+  <testcase name="testGetMovieAverageRatingPos()" classname="RatingsTest" time="0.001"/>
+  <testcase name="testGetNumRatingsNeg()" classname="RatingsTest" time="0.001"/>
+  <testcase name="testGetNumRatingsPos()" classname="RatingsTest" time="0.0"/>
+  <testcase name="testGetMostRatedUsersNeg()" classname="RatingsTest" time="0.001"/>
+  <testcase name="testGetMostRatedUsersPos()" classname="RatingsTest" time="0.0"/>
+  <testcase name="testGetUserRatingsNeg()" classname="RatingsTest" time="0.001"/>
+  <testcase name="testGetUserRatingsPos()" classname="RatingsTest" time="0.0"/>
+  <testcase name="testGetUserAverageRatingNeg()" classname="RatingsTest" time="0.0"/>
+  <testcase name="testGetUserAverageRatingPos()" classname="RatingsTest" time="0.001"/>
+  <testcase name="testGetTopAverageRatedMoviesNeg()" classname="RatingsTest" time="0.0"/>
+  <testcase name="testGetTopAverageRatedMoviesPos()" classname="RatingsTest" time="0.0"/>
+  <testcase name="testAddNeg()" classname="RatingsTest" time="0.0"/>
+  <testcase name="testAddPos()" classname="RatingsTest" time="0.0"/>
+  <testcase name="testSetAdd()" classname="RatingsTest" time="0.0"/>
+  <testcase name="testSetPos()" classname="RatingsTest" time="0.001"/>
+  <testcase name="testRemoveNeg()" classname="RatingsTest" time="0.0"/>
+  <testcase name="testRemovePos()" classname="RatingsTest" time="0.0"/>
+  <testcase name="testGetMovieRatingsNeg()" classname="RatingsTest" time="0.0"/>
+  <testcase name="testGetMovieRatingsPos()" classname="RatingsTest" time="0.0"/>
+  <system-out><![CDATA[
+Starting testGetMovieAverageRatingsNeg...
+
+Starting testGetMovieAverageRatings Pos ...
+
+Starting testGetNumRatingsNeg...
+
+Starting testGetNumRatingsPos...
+
+Starting testGetMostRatedUsers ...
+
+Starting testGetMostRatedUsersPos...
+
+Starting testGetUserRatingsNeg...
+
+Starting testGetUserRatingsPos...
+
+Starting testGetUserAverageRatingsNeg...
+
+Starting testGetUserAverageRatings Pos ...
+
+StartingGetTopAverageMoviesUsers ...
+
+Starting testGetTopAverageMoviesPos...
+
+Starting testAddNeg...
+
+Starting testAddPos...
+
+Starting testSetAdd...
+
+Starting testSetPos...
+
+Starting testRemoveNeg...
+
+Starting testRemovePos...
+
+Starting testGetMovieRatingsNeg...
+
+Starting testGetMovieRatingsPos...
+1.0
+2.2
+1.3
+4.4
+3.5
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
